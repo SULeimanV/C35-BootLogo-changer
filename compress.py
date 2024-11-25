@@ -23,7 +23,7 @@ def write_bytes(i):
 
 	g = int.from_bytes(logos[0][::-1])
 
-	byte[48:48+g] = compr_out
+	byte[48:48+g] = bytearray(compr_out) 
 
 	#g = int.from_bytes(logos[0][::-1])
 	go = g
