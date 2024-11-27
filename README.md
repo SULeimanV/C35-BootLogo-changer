@@ -9,7 +9,7 @@ HOW TO USE IT:
 
 2 Run in terminal "python(3) decompess.py". Files will be created In this folder
 
-3 Run "python(3) compress.py". It compresses the .bmp files to custom_logo.bin with equal size (logo.bin)
+3 Run "python(3) compress.py". It compresses the .bmp files to custom_logo.bin with equal size (logo.bin). If new logo.bin will be larger than the original, the script will report it. 
 
 ---------------
 
