@@ -31,15 +31,17 @@ byte = bytearray(file.read())
 logos = []
 
 try:
-	if byte[0:3] == b'GZ\x06':
+	if byte[0:2] == b'GZ':
 		print("logo bin header found")
 	else:
 		raise NameError("Header not found")
 
-	for i in range(6):
+	logos_count = int.from_bytes(byte[2])
+
+	for i in range(logos_count):
 		logos.append(byte[24+i*4:27+i*4]) #Sizes
 
-	get_bytes(5)
+	get_bytes(logos_count-1)
 
 	print("Succesfully extracted!")
 
