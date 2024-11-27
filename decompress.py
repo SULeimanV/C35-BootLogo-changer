@@ -17,7 +17,7 @@ def get_bytes(i):
 		with open(f"{str(byte[pad+10:pad+11],encoding='ASCII')}.bmp", "wb") as i_out_file:
 			i_out_file.write(gzip.decompress(byte[pad:pad+g]))
 
-	for ii in range(1,i+1):
+	for ii in range(1,i):
 		g+=int.from_bytes(logos[ii][::-1])
 		with open(f"{str(byte[pad+10+go:pad+11+go],encoding='ASCII')}.bmp.gz", "wb") as logo_gz:
 			logo_gz.write(byte[pad+go:pad+g])
@@ -44,7 +44,7 @@ try:
 	for i in range(logos_count):
 		logos.append(byte[24+i*4:27+i*4]) #Sizes
 
-	get_bytes(logos_count-1)
+	get_bytes(logos_count)
 
 	print("Succesfully extracted!")
 
