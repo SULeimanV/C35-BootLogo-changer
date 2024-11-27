@@ -72,16 +72,18 @@ try:
 	else:
 		raise NameError("Header not found")
 
-	for i in range(6):
+	logos_count = int.from_bytes(byte[2])
+
+	for i in range(logos_count):
 		logos.append(byte[24+i*4:27+i*4]) #Sizes
 
 
 
-	onames = get_names(5)
+	onames = get_names(logos_count - 1)
 
-	write_bytes(5)
+	write_bytes(logos_count - 1)
 
-	write_lens(5)
+	write_lens(logos_count - 1)
 
 	print("Succesfully extracted!")
 
