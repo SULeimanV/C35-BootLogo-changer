@@ -73,7 +73,7 @@ try:
 		raise NameError("Header not found")
 
 	for i in range(6):
-		logos.append(byte[24+i*4:26+i*4]) #Sizes
+		logos.append(byte[24+i*4:27+i*4]) #Sizes
 
 
 
