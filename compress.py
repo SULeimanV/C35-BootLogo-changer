@@ -97,7 +97,7 @@ print(oblen,len(byte))
 
 if oblen > len(byte):
 	byte[len(byte):] = bytearray(oblen - len(byte))
-else:
+elif oblen != len(byte):
 	with open("new_logo_greater.txt", "w") as nlg:
 		nlg.write(f"Warning!\norig: {oblen}\nnew: {len(byte)}")
 
