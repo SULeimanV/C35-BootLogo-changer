@@ -9,7 +9,7 @@ def get_bytes(i):
 	g = int.from_bytes(logos[0][::-1])
 	go = g
 
-	with open(f"{str(byte[48+10:48+11],encoding='ASCII')}.gz", "wb") as logo_gz:
+	with open(f"{str(byte[48+10:48+11],encoding='ASCII')}.bmp.gz", "wb") as logo_gz:
 		logo_gz.write(byte[48:48+g])
 
 		with open(f"{str(byte[48+10:48+11],encoding='ASCII')}.bmp", "wb") as i_out_file:
@@ -17,7 +17,7 @@ def get_bytes(i):
 
 	for ii in range(1,i+1):
 		g+=int.from_bytes(logos[ii][::-1])
-		with open(f"{str(byte[48+10+go:48+11+go],encoding='ASCII')}.gz", "wb") as logo_gz:
+		with open(f"{str(byte[48+10+go:48+11+go],encoding='ASCII')}.bmp.gz", "wb") as logo_gz:
 			logo_gz.write(byte[48+go:48+g])
 
 			with open(f"{str(byte[48+10+go:48+11+go],encoding='ASCII')}.bmp", "wb") as i_out_file:
@@ -35,17 +35,14 @@ try:
 		print("logo bin header found")
 	else:
 		raise NameError("Header not found")
-	
+
 	for i in range(6):
 		logos.append(byte[24+i*4:26+i*4]) #Sizes
-		
+
 	get_bytes(5)
-	
+
 	print("Succesfully extracted!")
 
-	#print("Extracting logos from gzips")
-
-	#with
 
 except NameError:
 	print('An exception flew by!')
@@ -54,4 +51,3 @@ except NameError:
 
 
 file.close()
-
