@@ -8,24 +8,26 @@ byte = bytearray(file.read())
 logos = []
 oblen = len(byte)
 onames = []
+logos_count = 0
+pad = 0
 
 def get_names(i) :
 	buff=[]
 	g = int.from_bytes(logos[0][::-1])
 	go = g
 
-	buff.append(str(byte[48+10:48+11], encoding='ASCII'))
+	buff.append(str(byte[pad+10:pad+11], encoding='ASCII'))
 
-	for ii in range(1,i+1):
+	for ii in range(1,i):
 		g+=int.from_bytes(logos[ii][::-1])
-		buff.append(str(byte[48+10+go:48+11+go],encoding='ASCII'))
+		buff.append(str(byte[pad+10+go:pad+11+go],encoding='ASCII'))
 		go = g
 	print(buff)
 	return buff
 
 
 def write_bytes(i):
-	byte[48:]=[]
+	byte[pad:]=[]
 	pass
 	g=0
 	compr_out = b""
@@ -38,13 +40,13 @@ def write_bytes(i):
 
 	g = int.from_bytes(logos[0][::-1])
 
-	byte[48:] = bytearray(compr_out)
+	byte[pad:] = bytearray(compr_out)
 
 	go = g
 
 
 
-	for ii in range(1,i+1):
+	for ii in range(1,i):
 		with open(f"{onames[ii]}.bmp", "rb") as f_in:
 
 			with gzip.open(f'{onames[ii]}.bmp.gz', 'wb', compresslevel=9) as f_out:
@@ -56,14 +58,13 @@ def write_bytes(i):
 
 		g+=int.from_bytes(logos[ii][::-1])
 
-		byte[48+go:] = bytearray(compr_out)
+		byte[pad+go:] = bytearray(compr_out)
 
 		go = g
 
-def write_lens(i):
-	pass
-	for i in range(6):
-		byte[24+i*4:26+i*4] = logos[i]
+def write_lens(i):
+	for ii in range(i):
+		byte[24+i*4:27+i*4] = logos[ii]
 
 
 try:
@@ -73,17 +74,18 @@ try:
 		raise NameError("Header not found")
 
 	logos_count = int.from_bytes(byte[2])
+	pad = 24 + 4 * logos_count 
 
 	for i in range(logos_count):
 		logos.append(byte[24+i*4:27+i*4]) #Sizes
 
 
 
-	onames = get_names(logos_count - 1)
+	onames = get_names(logos_count)
 
-	write_bytes(logos_count - 1)
+	write_bytes(logos_count)
 
-	write_lens(logos_count - 1)
+	write_lens(logos_count)
 
 	print("Succesfully extracted!")
 
