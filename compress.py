@@ -22,6 +22,7 @@ def get_names(i) :
 		g+=int.from_bytes(logos[ii][::-1])
 		buff.append(str(byte[pad+10+go:pad+11+go],encoding='ASCII'))
 		go = g
+	print(buff)
 	return buff
 
 
