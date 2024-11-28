@@ -38,11 +38,11 @@ try:
 	else:
 		raise NameError("Header not found")
 
-	logos_count = int.from_bytes(byte[2])
-	pad = 24 + 4 * logos_count 
+	logos_count = int(byte[2])
+	pad = 24 + 4 * logos_count
 
 	for i in range(logos_count):
-		logos.append(byte[24+i*4:27+i*4]) #Sizes
+		logos.append(byte[24+i*4:28+i*4]) #Sizes
 
 	get_bytes(logos_count)
 
