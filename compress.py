@@ -22,7 +22,6 @@ def get_names(i) :
 		g+=int.from_bytes(logos[ii][::-1])
 		buff.append(str(byte[pad+10+go:pad+11+go],encoding='ASCII'))
 		go = g
-	print(buff)
 	return buff
 
 
@@ -36,7 +35,7 @@ def write_bytes(i):
 			shutil.copyfileobj(f_in, f_out)
 	with open(f"{onames[0]}.bmp.gz", "rb") as f_in:
 		compr_out = f_in.read()
-		logos[0]= len(compr_out).to_bytes(2)[::-1]
+		logos[0]= len(compr_out).to_bytes(4)[::-1]
 
 	g = int.from_bytes(logos[0][::-1])
 
@@ -54,7 +53,7 @@ def write_bytes(i):
 
 		with open(f"{onames[ii]}.bmp.gz", "rb") as f_in:
 			compr_out = f_in.read()
-			logos[ii] = len(compr_out).to_bytes(2)[::-1]
+			logos[ii] = len(compr_out).to_bytes(4)[::-1]
 
 		g+=int.from_bytes(logos[ii][::-1])
 
@@ -62,10 +61,10 @@ def write_bytes(i):
 
 		go = g
 
-def write_lens(i):
+def write_lens(i):
 	for ii in range(i):
-		byte[24+i*4:27+i*4] = logos[ii]
-
+		byte[24+ii*4:28+ii*4] = logos[ii]
+	
 
 try:
 	if byte[0:3] == b'GZ\x06':
@@ -73,13 +72,13 @@ try:
 	else:
 		raise NameError("Header not found")
 
-	logos_count = int.from_bytes(byte[2])
+	logos_count = int(byte[2])
 	pad = 24 + 4 * logos_count 
 
 	for i in range(logos_count):
-		logos.append(byte[24+i*4:27+i*4]) #Sizes
+		logos.append(byte[24+i*4:28+i*4]) #Sizes
 
-
+	print(logos)
 
 	onames = get_names(logos_count)
 
