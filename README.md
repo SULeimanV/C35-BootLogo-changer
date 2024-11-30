@@ -13,6 +13,6 @@ HOW TO USE IT:
 
 2',3' Or use precompiled files like in points 2 and 3.
 ---------------
-
+Original logo.bin with maximum size in the repository
 
 _Please, you can send your logo.bin here to learn it_
