@@ -68,7 +68,7 @@ def write_lens(i):
 	
 
 try:
-	if byte[0:3] == b'GZ':
+	if byte[0:2] == b'GZ':
 		print("logo bin header found")
 	else:
 		raise NameError("Header not found")
