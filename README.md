@@ -1,5 +1,6 @@
 # C35-BootLogo-changer
 Tool for changing bootlogo on Realme c35, c53 (maybe other models work). SoC: T616
+
 Bootloader unlocking is not needed
 --------------
 
